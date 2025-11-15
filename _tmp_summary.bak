@@ -1,0 +1,44 @@
+# Part 1 – Reading and Exploration
+
+## 1. Key MCP Concepts (from Hugging Face Blog)
+
+The **Model Context Protocol (MCP)** is an open standard that defines how AI agents connect to external tools, data sources, and services in a consistent and model-agnostic way.  
+Instead of creating one integration per model and per API (the “N×M problem”), MCP introduces a **client–server architecture** where:
+
+- The **AI app** (host) communicates with an MCP **client**.
+- The MCP client talks to one or more **servers**, each exposing specific capabilities such as file access, databases, or mapping services.
+- These servers describe their available operations (endpoints) through standardized **JSON schemas** and **HTTP-based APIs**.
+
+This design allows any MCP-compatible agent (e.g., OpenAI Assistant, Gemini agent, or other SDK-based model) to interact with any MCP server **without additional adapters**.  
+MCP acts as a universal connector or a “USB-C for AI tools,” ensuring interoperability between different AI systems and tools.  
+It also emphasizes:
+- **Capability discovery:** Agents can list what each tool can do.
+- **Security & context control:** Protecting against prompt-injection and sandboxing tool access.
+- **Reusability:** Any MCP-compliant server can be plugged into multiple AI systems.
+
+Overall, MCP bridges the gap between AI reasoning models and real-world data sources by defining a structured and secure protocol for communication.
+
+---
+
+## 2. Core Features and Design Patterns in Existing Map Servers
+
+When exploring open-source mapping platforms such as **OpenStreetMap (OSM)**, **MapLibre**, and **Leaflet Tile Providers**, several consistent architectural patterns emerge:
+
+- **Modularity:** Mapping ecosystems are split into layers — base map tiles, routing, geocoding, and POI (point of interest) search are often provided by separate modules or APIs.
+- **Open Standards:** Most services use RESTful APIs returning JSON or GeoJSON. URLs are predictable and follow standard query formats (e.g., `/route?origin=A&destination=B`).
+- **Layered Rendering:** MapLibre focuses on client-side rendering of vector tiles with customizable styling, allowing open and flexible visualizations.
+- **Extensibility:** Many services (like OSM) allow developers to build routing, navigation, or analytics layers on top of a shared open data foundation.
+- **API Key Access & Rate Limits:** Public tile and geocoding servers often use simple authentication with keys and apply fair-usage limits.
+- **Interoperability:** All these servers are designed to be combined — for instance, Leaflet can render MapLibre tiles and overlay OSM data easily.
+
+These design practices align perfectly with MCP’s goals. Just as MCP defines a **standard communication layer** for AI–tool interaction, map servers define **standardized web interfaces** for location-based data.  
+Therefore, when building custom map servers using the OpenAI Agents SDK, each tool can mirror these principles: provide clear endpoints, standardized JSON responses, and composable features such as geocoding, routing, or POI search.  
+
+---
+
+## References
+- Hugging Face Blog: *Introducing the Model Context Protocol (MCP)* – [https://huggingface.co/blog/Kseniase/mcp](https://huggingface.co/blog/Kseniase/mcp)  
+- OpenStreetMap – [https://www.openstreetmap.org](https://www.openstreetmap.org)  
+- MapLibre – [https://maplibre.org](https://maplibre.org)  
+- Leaflet Tile Providers – [https://leaflet-extras.github.io/leaflet-providers](https://leaflet-extras.github.io/leaflet-providers)
+

@@ -1,0 +1,429 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2606 >>
+stream
+BT
+/F1 12 Tf
+1 0 0 1 72 708 Tm
+14 TL
+(Demo Presentation) Tj
+T*
+T*
+(Title: Demo Presentation \(Screencast Plan and Script\)) Tj
+T*
+(Author: [Your Name]) Tj
+T*
+(Date: [Date]) Tj
+T*
+(Video Link: [Add after recording]) Tj
+T*
+(Code Repository: [Add repo URL]) Tj
+T*
+() Tj
+T*
+(Goal and Audience) Tj
+T*
+(Demonstrate the agent, how it leverages multiple map servers, and key lessons learned.) Tj
+T*
+(Audience: instructors/peers evaluating functionality, design choices, and understanding.) Tj
+T*
+() Tj
+T*
+(Running Order \(5–7 Minutes\)) Tj
+T*
+(0:00–0:30 — Intro: Project goal and one-line pitch.) Tj
+T*
+(0:30–1:30 — Architecture: Agent + provider modules overview.) Tj
+T*
+(1:30–3:30 — Demo 1: Geocoding/POI search using two providers \(contrast\).) Tj
+T*
+(3:30–5:00 — Demo 2: Routing or Overpass feature query.) Tj
+T*
+(5:00–6:00 — Challenges and solutions \(rate limits, normalization, caching\).) Tj
+T*
+(6:00–6:45 — Results: What works well; edge cases; performance.) Tj
+T*
+(6:45–7:00 — Close: Repo link, how to run, next steps.) Tj
+T*
+() Tj
+T*
+(Script \(Concise Talking Points\)) Tj
+T*
+(Intro) Tj
+T*
+(“Hi, I’m [Name]. This is [Agent Name], which answers location-based queries by combining) Tj
+T*
+(multiple map servers for better coverage and reliability.”) Tj
+T*
+() Tj
+T*
+(Architecture) Tj
+T*
+(“The agent normalizes responses from [Server A], [Server B], and [Server C]. It routes) Tj
+T*
+(queries by type—geocoding, POI search, routing—and reconciles conflicting results.) Tj
+T*
+(Fallbacks and caching reduce latency and handle rate limits.”) Tj
+T*
+() Tj
+T*
+(Demo 1: Geocoding + POI Search) Tj
+T*
+(* Query: “Find coffee shops near [City/Neighborhood].”) Tj
+T*
+(* Show: Provider 1 \(e.g., Nominatim\) vs. Provider 2 \(e.g., Mapbox/Google\) results.) Tj
+T*
+(* Explain: Differences in counts, categories, and confidence; how the agent merges and) Tj
+T*
+(ranks results.) Tj
+T*
+() Tj
+T*
+(Demo 2: Routing or Feature Query) Tj
+T*
+(* Option A: “Best walking route from [A] to [B]” via routing API.) Tj
+T*
+(* Option B: “List parks \(amenity=park\) within [bbox]” via Overpass.) Tj
+T*
+(* Show: Request, response snippet, and rendered map or a concise textual summary.) Tj
+T*
+(* Explain: Rate-limit handling, retries, and user-facing error messages.) Tj
+T*
+() Tj
+T*
+(Challenges and Solutions) Tj
+T*
+(* Data inconsistencies across providers → normalization, tie-breaking, and consensus.) Tj
+T*
+(* Quotas/rate limits → exponential backoff + caching of hot paths.) Tj
+T*
+(* Ambiguous addresses → multi-provider disambiguation and optional user prompts.) Tj
+T*
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 2632 >>
+stream
+BT
+/F1 12 Tf
+1 0 0 1 72 708 Tm
+14 TL
+(Demo Presentation) Tj
+T*
+T*
+() Tj
+T*
+(Results and Lessons) Tj
+T*
+(* Multi-provider approach improved coverage and recall \(qualitatively/quantitatively\).) Tj
+T*
+(* Vector tiles sped up map rendering; Overpass enabled structured feature extraction.) Tj
+T*
+(* Logging and observability helped tune retries and provider selection.) Tj
+T*
+() Tj
+T*
+(Close) Tj
+T*
+(“Repo: [URL]. Setup instructions are in the README. The recording link is in the) Tj
+T*
+(submission. Next steps include adding isochrones, batch queries, and more tests.”) Tj
+T*
+() Tj
+T*
+(Live Demo Checklist) Tj
+T*
+(* Environment variables and API keys loaded; rate-limit headroom available.) Tj
+T*
+(* Demo scenarios rehearsed; fallback paths validated.) Tj
+T*
+(* Stable network; cache warmed for key calls.) Tj
+T*
+(* Terminal font large; map window ready; consistent theme.) Tj
+T*
+(* Copy-ready commands/queries in a notes doc.) Tj
+T*
+() Tj
+T*
+(On-Screen Flow \(Example\)) Tj
+T*
+(* Terminal: run `python demo.py --query "coffee shops near [City]"` and show logs) Tj
+T*
+(\(provider selection, retries, merged ranking\).) Tj
+T*
+(* Browser/app: display a small map or show ranked textual results.) Tj
+T*
+(* Terminal: run `python demo.py --route --from "[A]" --to "[B]"` for routing.) Tj
+T*
+(* Editor: briefly show provider modules and agent selection logic.) Tj
+T*
+() Tj
+T*
+(Recording Tips) Tj
+T*
+(* 1080p video, 125–150% UI scaling; clear mic; minimal background noise.) Tj
+T*
+(* Keep mouse movement deliberate; zoom windows to focus key moments.) Tj
+T*
+(* If a call might be slow, prewarm cache or show a recorded snippet.) Tj
+T*
+() Tj
+T*
+(Submission Notes) Tj
+T*
+(* Include: this PDF, code repository link, video link, and a short reflection \(1–2) Tj
+T*
+(paragraphs\) on lessons learned and next steps.) Tj
+T*
+() Tj
+T*
+(Example: Distance Tripoli → Beirut) Tj
+T*
+(* Command \(CLI\):) Tj
+T*
+(* `python -m part2_implementation.demo_runner "Distance from Tripoli to Beirut"`) Tj
+T*
+(* What happens under the hood:) Tj
+T*
+(* Agent detects a distance query → selects `ors_distance_places`.) Tj
+T*
+(* Geocodes both places with OSM/Nominatim → gets `[lon, lat]` pairs.) Tj
+T*
+(* Calls ORS Distance/Route API with those coordinates.) Tj
+T*
+(* Returns a compact JSON with `distance_km` and echoed coordinates.) Tj
+T*
+(* Expected JSON shape \(values vary by provider data\):) Tj
+T*
+(* `{ "answer": "...", "tool_results": [ { "tool": "ors_distance_places", "content": {) Tj
+T*
+("distance_km": <float>, "origin": [<lon>,<lat>], "destination": [<lon>,<lat>] } } ] }`) Tj
+T*
+(* Optional environment for offline-style demo:) Tj
+T*
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 3043 >>
+stream
+BT
+/F1 12 Tf
+1 0 0 1 72 708 Tm
+14 TL
+(Demo Presentation) Tj
+T*
+T*
+(* Set `MAP_AGENT_PROVIDER=ollama` \(if Ollama is running\) or run without OpenAI keys to use) Tj
+T*
+(heuristic fallback; output will show the tool used and JSON result directly.) Tj
+T*
+() Tj
+T*
+(Example: Hospitals in Tripoli) Tj
+T*
+(* Command \(CLI\):) Tj
+T*
+(* `python -m part2_implementation.demo_runner "Find 3 hospitals in Tripoli"`) Tj
+T*
+(* What happens under the hood:) Tj
+T*
+(* Agent detects a POI query → selects `osm_search_poi`.) Tj
+T*
+(* Uses OSM/Nominatim to search with `query="hospitals"`, `city="Tripoli"`, `max_count=3`.) Tj
+T*
+(* Returns a list of up to 3 items with name and coordinates.) Tj
+T*
+(* Expected JSON shape \(truncated\):) Tj
+T*
+(* `{ "answer": "...", "tool_results": [ { "tool": "osm_search_poi", "content": [ { "name":) Tj
+T*
+("...", "lat": "...", "lon": "..." }, ... ] } ] }`) Tj
+T*
+(* Notes:) Tj
+T*
+(* For best results, use a model provider \(OpenAI or `MAP_AGENT_PROVIDER=gemini`\) so the) Tj
+T*
+(tool args include the correct city from your prompt.) Tj
+T*
+(* If you run in offline/heuristic fallback, refine the prompt to be explicit \(e.g.,) Tj
+T*
+("Search POIs: hospitals, city: Tripoli, max=3"\) to avoid default city bias.) Tj
+T*
+() Tj
+T*
+(Components and File Roles \(Part 2\)) Tj
+T*
+(* part2_implementation/agent_sdk_app.py: Main agent. Defines tool schemas \(osm_geocode,) Tj
+T*
+(ors_route, etc.\), dispatches calls to servers, caches geocodes, and routes across) Tj
+T*
+(providers \(OpenAI/Gemini/Ollama\) with fallbacks.) Tj
+T*
+(* part2_implementation/servers/osm_server.py: OSM/Nominatim helper with async methods:) Tj
+T*
+(geocode\(place\), reverse\(lat, lon\), search_poi\(query, city, max_count\). Adds optional) Tj
+T*
+(country bias via OSM_COUNTRYCODES.) Tj
+T*
+(* part2_implementation/servers/ors_server.py: OpenRouteService helper with async methods:) Tj
+T*
+(route\(origin, destination, profile\), distance\(...\), nearby\(lat, lon\). Requires) Tj
+T*
+(ORS_API_KEY; parses variant response shapes; returns error dicts on failures.) Tj
+T*
+(* part2_implementation/mcp_base.py: Minimal MCP-style types \(MCPCommand, MCPMapServer) Tj
+T*
+(interface\) used to describe server commands.) Tj
+T*
+(* part2_implementation/openai_client.py: Loads OPENAI_API_KEY and constructs the OpenAI) Tj
+T*
+(client used in the OpenAI provider path.) Tj
+T*
+(* part2_implementation/gemini_provider.py: Direct Gemini calls and tool-calling bridge) Tj
+T*
+(translating our tool schema to Gemini function declarations and stitching function) Tj
+T*
+(responses.) Tj
+T*
+(* part2_implementation/demo_runner.py: Small CLI to run the agent with a prompt and print) Tj
+T*
+(the JSON result.) Tj
+T*
+(* part2_implementation/litellm_agents_demo.py: Optional demo of OpenAI Agents SDK routed) Tj
+T*
+(to Gemini via a local LiteLLM proxy.) Tj
+T*
+(* part2_implementation/map_agent.ipynb: Notebook variant of the demo \(interactive) Tj
+T*
+(exploration\).) Tj
+T*
+() Tj
+T*
+(APIs and Providers Used) Tj
+T*
+(* OSM/Nominatim \(no API key required; rate limits apply\)) Tj
+T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 2463 >>
+stream
+BT
+/F1 12 Tf
+1 0 0 1 72 708 Tm
+14 TL
+(Demo Presentation) Tj
+T*
+T*
+(* Search \(geocode\): https://nominatim.openstreetmap.org/search?q=<query>&format=json) Tj
+T*
+(* Reverse geocode:) Tj
+T*
+(https://nominatim.openstreetmap.org/reverse?lat=<lat>&lon=<lon>&format=json) Tj
+T*
+(* Headers: User-Agent: C5-MapAgent; Optional filter: OSM_COUNTRYCODES=lb,us \(example\)) Tj
+T*
+(* OpenRouteService \(requires ORS_API_KEY in part2_implementation/.env\)) Tj
+T*
+(* Directions: POST https://api.openrouteservice.org/v2/directions/{profile} body:) Tj
+T*
+({"coordinates": [[lon,lat],[lon,lat]]}) Tj
+T*
+(* POIs: POST https://api.openrouteservice.org/pois body includes bbox around [lon,lat]) Tj
+T*
+(* Headers: Authorization: <ORS_API_KEY>; Content-Type: application/json) Tj
+T*
+() Tj
+T*
+(Roles: OSM vs ORS) Tj
+T*
+(* OSMServer \(Nominatim\)) Tj
+T*
+(* Role: Place search, address lookup, reverse geocoding, and simple POI search by text.) Tj
+T*
+(Great for entity names and address resolution; open and free.) Tj
+T*
+(* Used for: Translating user place names to coordinates; reverse-mapping coordinates to) Tj
+T*
+(readable addresses; finding candidate POIs in a city.) Tj
+T*
+(* ORSServer \(OpenRouteService\)) Tj
+T*
+(* Role: Routing \(turn-by-turn steps\), distance/time summaries, and nearby POIs using a) Tj
+T*
+(bounding box. Requires API key; robust routing profiles.) Tj
+T*
+(* Used for: Driving/walking/cycling routes; distances between coordinates or between place) Tj
+T*
+(names \(with OSM geocode pre-step\); nearby discovery around a point.) Tj
+T*
+() Tj
+T*
+(Add to Live Demo \(talking cues\)) Tj
+T*
+(* “File roles: The agent is in part2_implementation/agent_sdk_app.py. It calls two server) Tj
+T*
+(wrappers under part2_implementation/servers: osm_server.py for Nominatim) Tj
+T*
+(\(search/reverse/POI\) and ors_server.py for OpenRouteService \(route/distance/nearby\).) Tj
+T*
+(mcp_base.py defines simple command descriptors; openai_client.py and gemini_provider.py) Tj
+T*
+(wire the model providers. demo_runner.py is the CLI entry.”) Tj
+T*
+(* “APIs: We use Nominatim’s public endpoints for geocoding and reverse, and ORS’s v2) Tj
+T*
+(Directions/POIs endpoints with an ORS_API_KEY. The agent normalizes outputs and handles) Tj
+T*
+(errors without crashing.”) Tj
+T*
+(* “Flow: For ‘distance between A and B’, we auto-geocode A and B with OSM, then call ORS) Tj
+T*
+(distance. For ‘route from A to B’, we call ORS route and show steps or a summary.”) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Contents 2 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Contents 3 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Contents 5 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+10 0 obj
+<< /Type /Pages /Count 4 /Kids [ 6 0 R 7 0 R 8 0 R 9 0 R ] >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000002736 00000 n 
+0000005419 00000 n 
+0000008513 00000 n 
+0000011027 00000 n 
+0000011154 00000 n 
+0000011281 00000 n 
+0000011408 00000 n 
+0000011535 00000 n 
+0000011613 00000 n 
+trailer
+<< /Size 12 /Root 11 0 R >>
+startxref
+11664
+%%EOF
